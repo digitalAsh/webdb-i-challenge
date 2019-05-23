@@ -8,10 +8,18 @@ const db = require('./data/accounts-model.js')
 
 server.use(express.json());
 
+server.get('/', (req, res) => {
+    res.send('testing get');
+})
 
 server.get('/api/accounts', async (req, res) => {
-    try{
-        const accounts = await db.find(req.query);
+    try {
+        const accounts = await db.find();
+        // if(accounts.length === 0){
+        //     res.status(204).json({
+        //         message: 'not getting shit back'
+        //     })
+        // } 
         res.status(200).json(accounts);
     } catch (error) {
         console.log(error);
